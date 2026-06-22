@@ -10,9 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let file2Data = null;
 
     // Handle file selection
-    const handleFileSelect = (input, nameDisplay, fileNum) => {
-        if (input.files.length > 0) {
-            const file = input.files[0];
+    const processFile = (file, nameDisplay, fileNum) => {
+        if (file) {
             nameDisplay.textContent = file.name;
             nameDisplay.style.color = '#f8fafc'; // primary text
             
@@ -28,11 +27,22 @@ document.addEventListener('DOMContentLoaded', () => {
         checkReady();
     };
 
-    fileInput1.addEventListener('change', () => handleFileSelect(fileInput1, fileName1, 1));
-    fileInput2.addEventListener('change', () => handleFileSelect(fileInput2, fileName2, 2));
+    fileInput1.addEventListener('change', (e) => {
+        const file = e.target.files.length > 0 ? e.target.files[0] : null;
+        processFile(file, fileName1, 1);
+    });
+    
+    fileInput2.addEventListener('change', (e) => {
+        const file = e.target.files.length > 0 ? e.target.files[0] : null;
+        processFile(file, fileName2, 2);
+    });
+
+    // Prevent default drag behaviors on the window to avoid opening PDFs accidentally
+    window.addEventListener('dragover', (e) => e.preventDefault(), false);
+    window.addEventListener('drop', (e) => e.preventDefault(), false);
 
     // Drag and drop visual feedback and file handling
-    const setupDragAndDrop = (dropzoneId, inputElement) => {
+    const setupDragAndDrop = (dropzoneId, inputElement, fileNum, nameDisplay) => {
         const dropzone = document.getElementById(dropzoneId);
         
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -60,14 +70,25 @@ document.addEventListener('DOMContentLoaded', () => {
             dropzone.classList.remove('dragover');
             const files = e.dataTransfer.files;
             if (files.length > 0) {
-                inputElement.files = files;
-                inputElement.dispatchEvent(new Event('change'));
+                const file = files[0];
+                
+                // Try to update the input element (might fail in some strict browsers without DataTransfer)
+                try {
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+                    inputElement.files = dataTransfer.files;
+                } catch (err) {
+                    console.warn("Could not assign to input.files directly, proceeding with file data.");
+                }
+                
+                // Directly process the file without relying on the change event
+                processFile(file, nameDisplay, fileNum);
             }
         }, false);
     };
 
-    setupDragAndDrop('dropzone1', fileInput1);
-    setupDragAndDrop('dropzone2', fileInput2);
+    setupDragAndDrop('dropzone1', fileInput1, 1, fileName1);
+    setupDragAndDrop('dropzone2', fileInput2, 2, fileName2);
 
     const checkReady = () => {
         if (file1Data && file2Data) {

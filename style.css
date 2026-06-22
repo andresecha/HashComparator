@@ -132,6 +132,42 @@ body {
     color: var(--text-primary);
 }
 
+.info-image-container {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.info-image {
+    max-width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.file-examples {
+    margin-top: 0.75rem;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+}
+
+.file-examples li {
+    margin-bottom: 0.25rem;
+    word-break: break-all;
+}
+
+.file-examples code {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.85em;
+    color: var(--accent-hover);
+}
+
+[data-theme="light"] .file-examples code {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--accent-color);
+}
+
 .upload-section {
     display: grid;
     grid-template-columns: 1fr 1fr;

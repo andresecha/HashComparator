@@ -132,6 +132,14 @@ body {
     color: var(--text-primary);
 }
 
+.emoji-row {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
 .info-image-container {
     margin: 1.5rem 0;
     text-align: center;
@@ -139,10 +147,8 @@ body {
 
 .info-image {
     width: 100%;
-    max-width: 500px;
     height: auto;
     display: block;
-    margin: 0 auto;
     border-radius: 8px;
     border: 1px solid var(--card-border);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);

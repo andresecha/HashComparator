@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fileInput1.addEventListener('change', () => handleFileSelect(fileInput1, fileName1, 1));
     fileInput2.addEventListener('change', () => handleFileSelect(fileInput2, fileName2, 2));
 
-    // Drag and drop visual feedback
+    // Drag and drop visual feedback and file handling
     const setupDragAndDrop = (dropzoneId, inputElement) => {
         const dropzone = document.getElementById(dropzoneId);
         
@@ -50,11 +50,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }, false);
         });
 
-        ['dragleave', 'drop'].forEach(eventName => {
+        ['dragleave'].forEach(eventName => {
             dropzone.addEventListener(eventName, () => {
                 dropzone.classList.remove('dragover');
             }, false);
         });
+
+        dropzone.addEventListener('drop', (e) => {
+            dropzone.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                inputElement.files = files;
+                inputElement.dispatchEvent(new Event('change'));
+            }
+        }, false);
     };
 
     setupDragAndDrop('dropzone1', fileInput1);

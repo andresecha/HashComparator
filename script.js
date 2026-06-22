@@ -37,58 +37,40 @@ document.addEventListener('DOMContentLoaded', () => {
         processFile(file, fileName2, 2);
     });
 
-    // Prevent default drag behaviors on the window to avoid opening PDFs accidentally
-    window.addEventListener('dragover', (e) => e.preventDefault(), false);
-    window.addEventListener('drop', (e) => e.preventDefault(), false);
-
-    // Drag and drop visual feedback and file handling
-    const setupDragAndDrop = (dropzoneId, inputElement, fileNum, nameDisplay) => {
+    // Visual feedback using the native file input's drag events
+    const setupDragAndDrop = (dropzoneId, inputElement) => {
         const dropzone = document.getElementById(dropzoneId);
         
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropzone.addEventListener(eventName, preventDefaults, false);
+        inputElement.addEventListener('dragenter', () => {
+            dropzone.classList.add('dragover');
         });
 
-        function preventDefaults(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropzone.addEventListener(eventName, () => {
-                dropzone.classList.add('dragover');
-            }, false);
-        });
-
-        ['dragleave'].forEach(eventName => {
-            dropzone.addEventListener(eventName, () => {
-                dropzone.classList.remove('dragover');
-            }, false);
-        });
-
-        dropzone.addEventListener('drop', (e) => {
+        inputElement.addEventListener('dragleave', () => {
             dropzone.classList.remove('dragover');
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                const file = files[0];
-                
-                // Try to update the input element (might fail in some strict browsers without DataTransfer)
-                try {
-                    const dataTransfer = new DataTransfer();
-                    dataTransfer.items.add(file);
-                    inputElement.files = dataTransfer.files;
-                } catch (err) {
-                    console.warn("Could not assign to input.files directly, proceeding with file data.");
-                }
-                
-                // Directly process the file without relying on the change event
-                processFile(file, nameDisplay, fileNum);
-            }
-        }, false);
+        });
+
+        inputElement.addEventListener('drop', () => {
+            dropzone.classList.remove('dragover');
+            // The browser will natively assign the dropped file to inputElement.files
+            // and fire the 'change' event automatically.
+        });
     };
 
-    setupDragAndDrop('dropzone1', fileInput1, 1, fileName1);
-    setupDragAndDrop('dropzone2', fileInput2, 2, fileName2);
+    setupDragAndDrop('dropzone1', fileInput1);
+    setupDragAndDrop('dropzone2', fileInput2);
+
+    // Theme toggle functionality
+    const themeToggleBtn = document.getElementById('themeToggle');
+    themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        if (currentTheme === 'light') {
+            document.documentElement.removeAttribute('data-theme');
+            themeToggleBtn.textContent = '☀️ Modo Claro';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            themeToggleBtn.textContent = '🌙 Modo Oscuro';
+        }
+    });
 
     const checkReady = () => {
         if (file1Data && file2Data) {

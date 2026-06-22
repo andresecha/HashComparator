@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparador de Hashes PDF</title>
+    <meta name="description" content="Una aplicación web para comparar archivos PDF basados en su hash en el nombre del archivo.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="app-container">
+        <header class="app-header">
+            <h1>Comparador de Hashes</h1>
+            <p>Sube dos archivos PDF para verificar si son idénticos basándose en su nombre.</p>
+        </header>
+
+        <section class="upload-section">
+            <div class="upload-card" id="dropzone1">
+                <input type="file" id="file1" accept="application/pdf" class="file-input">
+                <label for="file1" class="upload-label">
+                    <div class="icon">📄</div>
+                    <span class="upload-text">Selecciona o arrastra el primer PDF</span>
+                    <span class="file-name" id="fileName1">Ningún archivo seleccionado</span>
+                </label>
+            </div>
+
+            <div class="upload-card" id="dropzone2">
+                <input type="file" id="file2" accept="application/pdf" class="file-input">
+                <label for="file2" class="upload-label">
+                    <div class="icon">📄</div>
+                    <span class="upload-text">Selecciona o arrastra el segundo PDF</span>
+                    <span class="file-name" id="fileName2">Ningún archivo seleccionado</span>
+                </label>
+            </div>
+        </section>
+
+        <div class="action-section">
+            <button id="compareBtn" class="compare-btn" disabled>Comparar Archivos</button>
+        </div>
+
+        <section id="resultSection" class="result-section hidden">
+            <!-- Results will be injected here -->
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

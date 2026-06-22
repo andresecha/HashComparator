@@ -107,6 +107,31 @@ body {
     font-size: 1.1rem;
 }
 
+.info-alert {
+    background: var(--card-bg);
+    border-left: 4px solid var(--accent-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.info-alert h3 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-alert strong {
+    color: var(--text-primary);
+}
+
 .upload-section {
     display: grid;
     grid-template-columns: 1fr 1fr;

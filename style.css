@@ -141,7 +141,7 @@ body {
 }
 
 .info-image-container {
-    margin: 1.5rem 0;
+    margin: 1.5rem -1.5rem;
     text-align: center;
 }
 
@@ -149,8 +149,11 @@ body {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 8px;
-    border: 1px solid var(--card-border);
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 

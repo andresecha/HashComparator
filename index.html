@@ -18,21 +18,6 @@
             <p>Sube dos archivos PDF para verificar si son idénticos basándose en su nombre.</p>
         </header>
 
-        <div class="info-alert">
-            <h3>ℹ️ ¿Qué archivos debo comparar?</h3>
-            <p>Para realizar la comparación correctamente, <strong>NO</strong> debes usar los documentos descargados con el botón azul que dice "descargar" en el visor. Debes utilizar exclusivamente los archivos que se exportan al hacer clic en el botón indicado en la siguiente captura de pantalla:</p>
-            
-            <div class="info-image-container">
-                <img src="ejemplo.jpeg" alt="Ejemplo del botón correcto para descargar los archivos" class="info-image">
-            </div>
-
-            <p>Al exportarlos, obtendrás dos archivos PDF cuyo nombre es un <strong>Hash</strong>. Un Hash es como una "huella dactilar" digital única (una larga cadena alfanumérica) generada matemáticamente a partir del contenido del archivo, lo que nos garantiza que no ha sido alterado. Sube esos dos archivos aquí para comprobar que sus Hashes coinciden. Por ejemplo:</p>
-            <ul class="file-examples">
-                <li><code>6ef5d5de69f03c5691f317a552e87dcedbba4a4232df95fef21353e0735a96ca.pdf</code></li>
-                <li><code>6ef5d5de69f03c5691f317a552e87dcedbba4a4232df95fef21353e0735a96ca (1).pdf</code></li>
-            </ul>
-        </div>
-
         <section class="upload-section">
             <div class="upload-card" id="dropzone1">
                 <input type="file" id="file1" accept="application/pdf" class="file-input">
@@ -60,6 +45,21 @@
         <section id="resultSection" class="result-section hidden">
             <!-- Results will be injected here -->
         </section>
+
+        <div class="info-alert">
+            <h3>ℹ️ ¿Qué archivos debo comparar?</h3>
+            <p>Para realizar la comparación correctamente, <strong>NO</strong> debes usar los documentos descargados con el botón azul que dice "descargar" en el visor. Debes utilizar exclusivamente los archivos que se exportan al hacer clic en el botón indicado en la siguiente captura de pantalla:</p>
+            
+            <div class="info-image-container">
+                <img src="ejemplo.jpeg" alt="Ejemplo del botón correcto para descargar los archivos" class="info-image">
+            </div>
+
+            <p>Al exportarlos, obtendrás dos archivos PDF cuyo nombre es un <strong>Hash</strong>. Un Hash es como una "huella dactilar" digital única (una larga cadena alfanumérica) generada matemáticamente a partir del contenido del archivo, lo que nos garantiza que no ha sido alterado. Sube esos dos archivos aquí para comprobar que sus Hashes coinciden. Por ejemplo:</p>
+            <ul class="file-examples">
+                <li><code>6ef5d5de69f03c5691f317a552e87dcedbba4a4232df95fef21353e0735a96ca.pdf</code></li>
+                <li><code>6ef5d5de69f03c5691f317a552e87dcedbba4a4232df95fef21353e0735a96ca (1).pdf</code></li>
+            </ul>
+        </div>
     </main>
 
     <script src="script.js"></script>
